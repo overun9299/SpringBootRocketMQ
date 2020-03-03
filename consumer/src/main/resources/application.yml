@@ -1,5 +1,5 @@
 server:
-  port: 6667
+  port: 6666
   servlet:
     context-path: /consumer
 
@@ -8,11 +8,11 @@ rocketmq:
   consumer:
     isOnOff: on
     # 官方建议：确保同一组中的每个消费者订阅相同的主题。
-    groupName: CicadaGroup
+    groupName: OVERUN
     # 服务地址
     namesrvAddr: 127.0.0.1:9876
     # 接收该 Topic 下所有 Tag
-    topics: CicadaTopic~*;
+    topics: Soap~*;
     consumeThreadMin: 20
     consumeThreadMax: 64
     # 设置一次消费消息的条数，默认为1条
@@ -20,6 +20,7 @@ rocketmq:
 
 # 配置 Group  Topic  Tag
 rocket:
-  group: CicadaGroup
-  topic: CicadaTopic
-  tag: CicadaTag
+  group: OVERUN
+  topic: Soap
+  tag: Game
+

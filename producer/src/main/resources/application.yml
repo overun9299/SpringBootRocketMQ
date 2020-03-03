@@ -8,7 +8,7 @@ rocketmq:
   producer:
     isOnOff: on
     # 发送同一类消息的设置为同一个group，保证唯一
-    groupName: CicadaGroup
+    groupName: OVERUN
     # 服务地址
     namesrvAddr: 127.0.0.1:9876
     # 消息最大长度 默认1024*4(4M)
@@ -20,6 +20,6 @@ rocketmq:
 
 # 配置 Group  Topic  Tag
 rocket:
-  group: CicadaGroup
-  topic: CicadaTopic
-  tag: CicadaTag
+  group: OVERUN
+  topic: Soap
+  tag: Game

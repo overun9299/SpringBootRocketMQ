@@ -6,6 +6,7 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -23,8 +24,13 @@ public class RocketMsgListener implements MessageListenerConcurrently {
 
     private static final Logger LOG = LoggerFactory.getLogger(RocketMsgListener.class) ;
 
+    @Value("${rocket.topic}")
+    private String topic;
+
     @Override
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext context) {
+
+       
         if (CollectionUtils.isEmpty(list)){
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         }
@@ -35,11 +41,11 @@ public class RocketMsgListener implements MessageListenerConcurrently {
         if(reConsume ==3){
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         }
-        if(messageExt.getTopic().equals("CicadaTopic")){
+        if(messageExt.getTopic().equals(topic)){
             String tags = messageExt.getTags() ;
             switch (tags){
-                case "CicadaTag":
-                    LOG.info("----开户 tag == >>"+tags);
+                case "Game":
+                    LOG.info("----游戏 tag == >>"+tags);
                     break ;
                 default:
                     LOG.info("----未匹配到Tag == >>"+tags);

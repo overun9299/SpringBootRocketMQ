@@ -3,6 +3,7 @@ package soap.config;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
+import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,6 +45,9 @@ public class ConsumerConfig {
         consumer.registerMessageListener(msgListener);
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         consumer.setConsumeMessageBatchMaxSize(consumeMessageBatchMaxSize);
+        /** 消费模式（广播：MessageModel.BROADCASTING   负载均衡：MessageModel.CLUSTERING） */
+        consumer.setMessageModel(MessageModel.BROADCASTING);
+//        consumer.setMessageModel(MessageModel.CLUSTERING);
         try {
             String[] topicTagsArr = topics.split(";");
             for (String topicTags : topicTagsArr) {

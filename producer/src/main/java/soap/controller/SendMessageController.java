@@ -17,8 +17,33 @@ public class SendMessageController {
     @Autowired
     private RocketMqService rocketMqService;
 
-    @GetMapping(value = "/sendMessage")
-    public void sendMessage(String message) {
-        rocketMqService.openAccountMsg(message);
+
+    /**
+     * 发送同步消息
+     * @param message
+     */
+    @GetMapping(value = "/sendSynchMessage")
+    public void sendSynchMessage(String message) {
+        rocketMqService.sendSynchMessage(message);
     }
+
+    /**
+     * 发送异步消息
+     * @param message
+     */
+    @GetMapping(value = "/sendAsyncMessage")
+    public void sendAsyncMessage(String message) {
+        rocketMqService.sendAsynchMessage(message);
+    }
+
+    /**
+     * 单向发送消息
+     * @param message
+     */
+    @GetMapping(value = "/sengOnewayMessage")
+    public void sengOnewayMessage(String message) {
+        rocketMqService.sengOnewayMessage(message);
+    }
+
+
 }
